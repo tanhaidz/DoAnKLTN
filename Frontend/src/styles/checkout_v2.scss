@@ -1,0 +1,979 @@
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+
+body.orderpage {
+    #root {
+        display: flex;
+        flex-direction: column;
+        flex: 1 0 auto;
+
+        color: #737373;
+        background: white !important;
+        font-size: 14px;
+        font-family: Helvetica Neue, sans-serif;
+        line-height: 1.3em;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        word-break: break-word;
+        overflow-x: hidden;
+
+        button {
+            &.order-summary-toggle {
+                flex-shrink: 0;
+
+                .wrap {
+                    .order-summary-toggle-inner {
+                        display: table;
+                        box-sizing: border-box;
+                        width: 100%;
+                        zoom: 1;
+
+                        &:after {
+                            content: "";
+                            display: table;
+                        }
+
+                        &:before {
+                            content: "";
+                            display: table;
+                        }
+
+                        .order-summary-toggle-icon-wrapper {
+                            display: table-cell;
+                            vertical-align: middle;
+                            padding-right: 0.75em;
+                            white-space: nowrap;
+                        }
+
+                        .order-summary-toggle-text {
+                            color: #000000;
+                            vertical-align: middle;
+                            transition: color 0.2s ease-in-out;
+                            display: none;
+                        }
+
+                        .order-summary-toggle-total-recap {
+                            display: table-cell;
+                            vertical-align: middle;
+                            text-align: right;
+                            padding-left: 0.75em;
+                            white-space: nowrap;
+                        }
+                    }
+                }
+            }
+
+            &.order-summary-toggle.order-summary-toggle-hide {
+                .order-summary-toggle-inner {
+                    .order-summary-toggle-text.order-summary-toggle-text-show {
+                        display: table-cell;
+                        width: 100%;
+                    }
+                }
+            }
+
+            &.order-summary-toggle.order-summary-toggle-show {
+                .order-summary-toggle-inner {
+                    .order-summary-toggle-text.order-summary-toggle-text-hide {
+                        display: table-cell;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+
+        .content {
+            .wrap {
+                .sidebar {
+                    &:after {
+                        content: "";
+                        display: block;
+                        width: 300%;
+                        position: absolute;
+                        top: 0;
+                        left: -100%;
+                        bottom: 0;
+                        background: #fafafa;
+
+                        z-index: -1;
+                        box-shadow: 0 -1px 0 #e1e1e1 inset;
+                    }
+
+                    .sidebar-content {
+                        .order-summary {
+                            h2 {
+                                color: #323232;
+                            }
+
+                            .order-summary-sections {
+                                .order-summary-section {
+
+
+                                    border-top: 1px solid;
+                                    padding-top: 1.5em;
+                                    padding-bottom: 1.5em;
+                                    border-color: #e1e1e1;
+
+                                    &:first-child {
+                                        border-top: none;
+                                    }
+
+                                    .product-table {
+                                        .product {
+                                            td {
+                                                padding-top: 1em;
+
+                                                &.product-image {
+                                                    .product-thumbnail {
+                                                        width: 4.6em;
+                                                        height: 4.6em;
+                                                        border-radius: 8px;
+                                                        background: #fff;
+                                                        position: relative;
+
+                                                        .product-thumbnail-wrapper {
+                                                            width: 100%;
+                                                            height: 100%;
+                                                            position: relative;
+                                                            overflow: hidden;
+                                                            border-radius: 8px;
+
+                                                            .product-thumbnail-image {
+                                                                position: absolute;
+                                                                top: 0;
+                                                                left: 0;
+                                                                right: 0;
+                                                                bottom: 0;
+                                                                max-width: 100%;
+                                                                max-height: 100%;
+                                                                margin: auto;
+                                                            }
+
+                                                        }
+
+                                                        .product-thumbnail-quantity {
+                                                            font-size: 0.85714em;
+                                                            font-weight: 500;
+                                                            white-space: nowrap;
+                                                            padding: 0.15em 0.65em;
+                                                            border-radius: 2em;
+                                                            background-color: rgba(153, 153, 153, 0.9);
+                                                            color: #fff;
+                                                            position: absolute;
+                                                            right: -0.75em;
+                                                            top: -0.75em;
+                                                            z-index: 2;
+                                                        }
+                                                    }
+                                                }
+
+                                                &.product-description {
+                                                    width: 100%;
+
+
+
+                                                    .product-description-option {
+                                                        overflow: hidden;
+                                                        min-height: 15px;
+
+                                                    }
+
+                                                    .product-description-name {
+                                                        overflow: hidden;
+                                                        min-height: 35px;
+                                                    }
+
+                                                    // .product-description-variant,
+                                                    // .product-description-property,
+                                                    .product-description-name {
+                                                        display: block;
+                                                    }
+
+
+                                                }
+
+                                                &.product-price {
+                                                    white-space: nowrap;
+
+
+                                                }
+
+                                            }
+                                        }
+
+                                        .product:first-child {
+                                            td {
+                                                padding-top: 0;
+
+
+                                            }
+                                        }
+                                    }
+
+                                    .panel.panel-default {
+                                        .panel-heading {
+                                            display: none
+                                        }
+
+                                        #collapse-coupon .form-group {
+                                            width: 100%;
+                                            float: left;
+                                            padding: 0.45em 0;
+                                            box-sizing: border-box;
+                                            margin-bottom: 10px;
+
+                                            .input-group {
+                                                display: flex;
+
+                                                >input {
+                                                    box-shadow: 0 0 0 1px #d9d9d9;
+                                                    transition: all 0.2s ease-out;
+                                                    background-color: white;
+                                                    color: #333333;
+                                                    border-radius: 4px;
+                                                    display: block;
+                                                    box-sizing: border-box;
+                                                    width: 100%;
+                                                    padding: 0.94em 2.8em 0.94em 0.8em;
+                                                    word-break: normal;
+                                                }
+
+                                                .input-group-btn>input {
+                                                    margin-left: 0.9em;
+                                                }
+                                            }
+                                        }
+
+                                        .table {
+                                            .total-line-table-footer {
+                                                white-space: nowrap;
+
+                                                td {
+                                                    padding-top: 3em;
+                                                    position: relative;
+
+                                                    .payment-due {
+                                                        .payment-due-price {
+                                                            font-size: 1.71429em;
+                                                            font-weight: 500;
+                                                            letter-spacing: -0.04em;
+                                                            color: #4b4b4b;
+                                                            line-height: 1em;
+                                                        }
+                                                    }
+
+                                                    &:before {
+                                                        background-color: #e1e1e1;
+                                                        content: '';
+                                                        position: absolute;
+                                                        top: 1.5em;
+                                                        left: 0;
+                                                        width: 100%;
+                                                        height: 1px;
+                                                    }
+                                                }
+
+
+                                            }
+                                        }
+
+                                    }
+
+
+                                }
+
+                                .clearfix:after {
+                                    visibility: hidden;
+                                    display: block;
+                                    font-size: 0;
+                                    content: " ";
+                                    clear: both;
+                                    height: 0;
+                                }
+                            }
+
+                            .order-summary-emphasis {
+                                font-weight: 500;
+                                color: #4b4b4b;
+                            }
+                        }
+                    }
+                }
+
+                .main {
+
+                    h2 {
+                        color: #333333;
+                    }
+
+                    .main-content {
+                        form {
+
+                            position: relative;
+                            overflow: hidden;
+                            padding: 10px;
+                            height: 850px;
+
+                            .step-sections {
+                                position: static;
+                                z-index: 3;
+
+                                &.active {
+                                    animation: toleft 0.13s linear forwards;
+                                }
+
+                                &:nth-child(2) {
+                                    position: absolute;
+                                    top: 0;
+                                    left: 600px;
+                                    background: white;
+                                    padding: 10px;
+                                    display: block;
+                                    height: 430px;
+
+                                    &:not(.active) {
+                                        animation: toRight 0.13s linear forwards;
+                                        display: none;
+                                    }
+
+                                }
+
+                                @keyframes toleft {
+                                    0% {
+                                        left: 600px;
+                                    }
+
+                                    100% {
+                                        left: 0px;
+                                    }
+                                }
+
+                                @keyframes toRight {
+                                    0% {
+                                        left: 0px;
+                                    }
+
+                                    100% {
+                                        left: 600px;
+                                    }
+                                }
+
+                                .section-header {}
+
+                                .section-content {
+                                    .fieldset {
+                                        margin: -0.45em;
+                                        zoom: 1;
+                                        display: flex;
+                                        flex-wrap: wrap;
+
+                                        &:after,
+                                        &:before {
+                                            content: "";
+                                            display: table;
+                                        }
+
+                                        &:after {
+                                            clear: both;
+                                        }
+
+                                        .field {
+                                            width: 100%;
+                                            float: left;
+                                            padding: 0.45em;
+                                            box-sizing: border-box;
+
+                                            .field-input-wrapper {
+                                                position: relative;
+
+                                                .field-label {
+                                                    font-size: 0.85714em;
+                                                    font-weight: normal;
+                                                    position: absolute;
+                                                    top: 0;
+                                                    width: 100%;
+                                                    padding: 0 0.93333em;
+                                                    z-index: 1;
+
+                                                    transform: translateY(3px);
+                                                    pointer-events: none;
+                                                    overflow: hidden;
+                                                    white-space: nowrap;
+                                                    text-overflow: ellipsis;
+                                                    box-sizing: border-box;
+                                                    opacity: 0;
+
+                                                    filter: alpha(opacity=0);
+                                                    color: #999999;
+                                                    transition: all 0.2s ease-out;
+                                                    margin: 0.5em 0;
+                                                    margin-top: 0.3em;
+                                                    display: block;
+                                                }
+
+                                                .field-input {
+
+                                                    outline: none;
+                                                    box-shadow: 0 0 0 1px #d9d9d9;
+                                                    transition: all 0.2s ease-out;
+                                                    background-color: white;
+                                                    color: #333333;
+                                                    border-radius: 4px;
+                                                    display: block;
+                                                    box-sizing: border-box;
+                                                    width: 100% !important;
+                                                    padding: 0.94em 2.8em 0.94em 0.8em;
+                                                    word-break: normal;
+                                                }
+                                            }
+
+                                            .field-input-wrapper.field-input-wrapper-select {
+                                                &:before {
+                                                    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMSIgaGVpZ2h0PSIxOSIgdmlld0JveD0iMCAwIDIxIDE5Ij48dGl0bGU+QXJ0Ym9hcmQgMTwvdGl0bGU+PGRlc2M+Q3JlYXRlZCB3aXRoIFNrZXRjaC48L2Rlc2M+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48ZyBmaWxsPSIjMDAwIj48Zz48cGF0aCBkPSJNMCAwaDF2MTlIMFYweiIgaWQ9IlNoYXBlIiBmaWxsLW9wYWNpdHk9Ii4xNSIvPjxwYXRoIGQ9Ik0xMSA4aDEwbC01IDUtNS01eiIgZmlsbC1vcGFjaXR5PSIuNSIvPjwvZz48L2c+PC9nPjwvc3ZnPg=='), none;
+                                                    content: '';
+                                                    position: absolute;
+                                                    right: 0;
+                                                    top: 0;
+                                                    bottom: 0;
+                                                    width: 50px;
+                                                    background-position: center center;
+                                                    background-repeat: no-repeat;
+                                                    pointer-events: none;
+                                                }
+
+                                                .field-label {
+                                                    transform: none;
+                                                    opacity: 1;
+                                                    filter: alpha(opacity=100);
+                                                }
+
+                                                select {
+                                                    padding-top: 1.5em;
+                                                    padding-bottom: 0.38em;
+                                                }
+                                            }
+                                        }
+
+                                        .fieldset .field.required {}
+                                    }
+                                }
+
+
+
+                                .section {
+                                    .section-header {
+                                        position: relative;
+                                    }
+
+                                    .section-title {
+                                        color: #333333;
+                                    }
+
+                                    .section-content {
+                                        zoom: 1;
+                                        margin-bottom: 2em;
+
+                                        &:last-child {
+                                            margin-bottom: inherit;
+                                        }
+
+                                        &:before,
+                                        &:after {
+                                            content: "";
+                                            display: table;
+                                        }
+
+                                        .content-box {
+                                            box-shadow: 0 0 0 1px #d9d9d9;
+                                            border-radius: 4px;
+                                            background: #fff;
+                                            color: #737373;
+                                            margin-top: 1em;
+                                            border: none;
+
+                                            &:first-child {
+                                                margin-top: 0;
+                                            }
+
+                                            .content-box-row {
+                                                display: table;
+                                                box-sizing: border-box;
+                                                width: 100%;
+                                                border-top: 1px solid #d9d9d9;
+                                                zoom: 1;
+
+                                                &:first-child {
+                                                    border-top-left-radius: 4px;
+                                                    border-top-right-radius: 4px;
+                                                    border-top: none;
+                                                }
+
+                                                &:last-child {
+                                                    border-bottom-left-radius: 4px;
+                                                    border-bottom-right-radius: 4px;
+                                                }
+
+                                                &:before,
+                                                &:after {
+                                                    content: "";
+                                                    display: table;
+                                                }
+
+                                                .radio-wrapper:last-child {
+                                                    margin-bottom: 0
+                                                }
+
+                                                .radio-wrapper {
+                                                    display: table;
+                                                    box-sizing: border-box;
+                                                    width: 100%;
+                                                    zoom: 1;
+
+                                                    &:last-child {
+                                                        margin-bottom: 0
+                                                    }
+
+                                                    &:before,
+                                                    &:after {
+                                                        content: "";
+                                                        display: table;
+                                                    }
+
+                                                    .radio-label {
+                                                        display: flex !important;
+                                                        cursor: pointer !important;
+                                                        align-items: center !important;
+                                                        padding: 1.3em !important;
+                                                        width: auto !important;
+
+                                                        .radio-input {
+                                                            display: table-cell;
+                                                            padding-right: 0.75em;
+                                                            white-space: nowrap;
+
+                                                            .input-radio {
+                                                                border-radius: 50%;
+
+                                                                width: 18px;
+                                                                height: 18px;
+                                                                box-shadow: 0 0 0 0 #000000 inset;
+                                                                transition: all 0.2s ease-in-out;
+                                                                position: relative;
+                                                                cursor: pointer;
+                                                                vertical-align: -4px;
+                                                                outline: 0;
+                                                                border: solid 1px #d9d9d9;
+
+                                                                &:checked {
+                                                                    border: none;
+                                                                    box-shadow: 0 0 0 10px #000000 inset;
+                                                                }
+                                                            }
+
+                                                        }
+
+                                                        .radio-label-primary {
+                                                            display: table-cell;
+                                                            width: 100%;
+                                                        }
+
+                                                        .radio-accessory {
+                                                            display: table-cell;
+                                                            padding-left: 0.75em;
+                                                            white-space: nowrap;
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                            >div:not(.radio-wrapper) {
+                                                padding: 0 10px 10px 10px;
+                                            }
+
+                                            .content-box-emphasis {
+                                                font-weight: 500;
+                                                color: #4d4d4d;
+                                            }
+                                        }
+
+
+
+
+                                    }
+                                }
+                            }
+                        }
+
+
+                        .step-footer {
+                            z-index: 2;
+                            position: relative;
+                            margin-top: 1em;
+                            zoom: 1;
+
+                            &:after {
+                                clear: both;
+                            }
+
+                            &:after,
+                            &:before {
+                                content: "";
+                                display: table;
+                            }
+
+                            .step-footer__by-step {
+                                width: 100%;
+
+                                .step-footer__by-step__flex {
+
+                                    display: flex;
+
+                                    flex-direction: row-reverse;
+
+                                    align-items: center;
+
+                                    .btn-spinner {
+                                        position: absolute;
+                                        top: 50%;
+                                        left: 50%;
+                                        margin-top: -10px;
+                                        margin-left: -10px;
+                                        opacity: 0;
+                                        // -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=" 0 ")";
+                                        // filter: alpha(opacity=0);
+                                    }
+                                }
+                            }
+
+                            .step-footer-previous-link {
+                                cursor: pointer;
+                                display: block;
+                            }
+
+                        }
+
+                        .step-footer__by-step {
+                            width: 100%;
+                            margin: 50px 0;
+
+                            .step-footer__by-step__flex {
+
+                                display: flex;
+
+                                flex-direction: row-reverse;
+
+                                align-items: center;
+                                justify-content: space-between;
+
+                                .btn-spinner {
+                                    position: absolute;
+                                    top: 50%;
+                                    left: 50%;
+                                    margin-top: -10px;
+                                    margin-left: -10px;
+                                    opacity: 0;
+                                    // -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=" 0 ")";
+                                    // filter: alpha(opacity=0);
+                                }
+                            }
+                        }
+
+                        .step-footer-previous-link {
+                            cursor: pointer;
+                            display: block;
+                        }
+                    }
+                }
+            }
+
+
+
+        }
+
+
+
+    }
+
+    button,
+    input,
+    optgroup,
+    select,
+    textarea {
+        color: inherit;
+        font: inherit;
+        margin: 0;
+        padding: 0;
+        border: none;
+        background: transparent;
+        line-height: normal;
+    }
+
+    // .wrap {
+    //     margin: 0 auto;
+    //     max-width: 40em;
+    //     zoom: 1;
+    // }
+    tbody,
+    td,
+    tfoot,
+    th,
+    thead,
+    tr {
+        border-color: inherit;
+        border-style: none;
+        border-width: 0;
+    }
+
+    .wrap:after,
+    .wrap:before {
+        content: "";
+        display: table;
+    }
+}
+
+
+body.orderpage,
+body.orderpage .content,
+body.orderpage .content .wrap,
+body.orderpage .content .wrap .main {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+}
+
+@media (min-width: 750px) {
+    body.orderpage {
+        #root {
+            .content {
+                .main {
+                    padding-top: 1.5em;
+
+                    .main-content {
+                        padding-bottom: 4em;
+
+                        .section .section-header {
+                            margin-bottom: 1.5em;
+                        }
+
+
+
+                        .step-footer {
+                            display: flex;
+                            flex-direction: row-reverse;
+                            align-items: center;
+                            margin-top: 1.5em;
+
+                            .step-footer-continue-btn {
+
+                                flex: 0 0 auto;
+                                float: right;
+
+
+                            }
+
+                            .step-footer-previous-link {
+
+                                flex: 1 1 auto;
+                                margin-right: 1em;
+                                float: left;
+                                display: block;
+                            }
+                        }
+                    }
+                }
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+    .step-footer .step-footer-info {
+        -webkit-flex: 1 1 auto;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        margin-right: 1em;
+        float: left;
+    }
+
+    .section {
+        padding-top: 10em;
+    }
+
+    .section.thank-you-checkout-info {
+        padding-top: 1.5em;
+    }
+
+
+
+    .field-half {
+        width: 50% !important;
+    }
+
+    .field-two-thirds {
+        width: 66.66667% !important;
+    }
+
+    .field-third {
+        width: 33.33333% !important;
+    }
+
+    .os-header {
+        margin: 0 0 -0.5em !important;
+    }
+
+    .icon {}
+
+    .icon.icon-closed-box {
+        width: 108px;
+        height: 85px;
+        background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDgiIGhlaWdodD0iODUiIHZpZXdCb3g9IjAgMCAxMDggODUiPjxnIHN0cm9rZT0iI0IyQjJCMiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIGZpbGw9Im5vbmUiPjxwYXRoIGQ9Ik0xIDE4aDEwNk0xMSA3MC4zaDI2bS0yNi02aDI2bS0yNi02aDE3Ii8+PC9nPjxwYXRoIHN0cm9rZT0iI0IyQjJCMiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIGQ9Ik0xIDE4bDEwLjctMTdoODQuN2wxMC42IDE3djYxLjVjMCAyLjUtMiA0LjUtNC41IDQuNWgtOTdjLTIuNSAwLTQuNS0yLTQuNS00LjV2LTYxLjV6TTU0IDF2MTYuNiIgZmlsbD0ibm9uZSIvPjwvc3ZnPg=='), none;
+    }
+
+    .icon.icon-closed-box.has-error {
+        width: 108px;
+        height: 85px;
+        background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDgiIGhlaWdodD0iODUiIHZpZXdCb3g9IjAgMCAxMDggODUiPjxnIHN0cm9rZT0iI2ZmNmQ2ZCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIGZpbGw9Im5vbmUiPjxwYXRoIGQ9Ik0xIDE4aDEwNk0xMSA3MC4zaDI2bS0yNi02aDI2bS0yNi02aDE3Ii8+PC9nPjxwYXRoIHN0cm9rZT0iI2ZmNmQ2ZCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIGQ9Ik0xIDE4bDEwLjctMTdoODQuN2wxMC42IDE3djYxLjVjMCAyLjUtMiA0LjUtNC41IDQuNWgtOTdjLTIuNSAwLTQuNS0yLTQuNS00LjV2LTYxLjV6TTU0IDF2MTYuNiIgZmlsbD0ibm9uZSIvPjwvc3ZnPg=='), none;
+    }
+}
+
+@media (min-width: 1000px) {
+    .wrap {
+        padding: 0 15px;
+        width: 100%;
+        max-width: 78.57143em;
+    }
+
+    .order-summary-toggle {
+        display: none;
+    }
+
+    body.orderpage {
+        .content {
+            .wrap {
+                flex-direction: row-reverse;
+
+                .sidebar {
+                    width: 38%;
+                    padding-left: 4%;
+                    background-position: left top;
+
+                    &:after {
+                        left: 0;
+                        background-position: left top;
+                        box-shadow: 1px 0 0 #e1e1e1 inset;
+                    }
+                }
+
+                .main {
+                    width: 52%;
+                    width: 52%;
+                    padding-right: 6%;
+
+                }
+
+
+            }
+
+
+        }
+    }
+
+
+
+
+
+    .main .main-header .logo {
+        display: block;
+    }
+
+    .main .main-header .breadcrumb {
+        margin-top: 1em;
+    }
+
+
+
+    .sidebar:after {
+        left: 0;
+        background-position: left top;
+        box-shadow: 1px 0 0 #e1e1e1 inset;
+    }
+
+    .sidebar .sidebar-content .order-summary .order-summary-sections .order-summary-section:first-child {
+        /*padding-top: 0;*/
+    }
+
+    .order-summary-section.order-summary-section-product-list {
+        padding: 10px 0;
+        padding-right: 10px;
+        overflow-y: auto;
+        max-height: calc(100vh - 350px);
+    }
+
+    .sidebar .sidebar-content .order-summary .order-summary-sections .order-summary-section::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        background-color: #F5F5F5;
+    }
+
+    .sidebar .sidebar-content .order-summary .order-summary-sections .order-summary-section::-webkit-scrollbar {
+        width: 3px;
+        background-color: #F5F5F5;
+    }
+
+    .sidebar .sidebar-content .order-summary .order-summary-sections .order-summary-section::-webkit-scrollbar-thumb {
+        background-color: #000000;
+        border: 1px solid #555555;
+    }
+}
+
+@media (min-width: 1000px) {
+
+    .main,
+    .sidebar {
+        padding-top: 4em;
+    }
+}
+
+@media (max-width: 999px) {
+    .content {}
+
+    .content.content-second {
+        display: block;
+    }
+
+    .wrap {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0 1em;
+    }
+
+    .banner {
+        display: block;
+    }
+
+    .main .main-header .breadcrumb {
+        display: none;
+    }
+
+    .sidebar .sidebar-content .order-summary.order-summary-is-collapsed {
+        height: 0;
+        overflow: hidden;
+    }
+}

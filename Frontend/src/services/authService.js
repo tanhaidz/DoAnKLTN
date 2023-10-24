@@ -1,0 +1,1 @@
+// Module này chứa các hàm hoặc lớp liên quan đến xác thực và quản lý đăng nhập / người dùng.Nó có thể chứa các hàm để xử lý việc đăng nhập, đăng xuất, xác thực mã thông báo(token), và các tác vụ liên quan đến quyền truy cập.

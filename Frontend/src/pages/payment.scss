@@ -1,0 +1,23 @@
+#qr-container {
+    text-align: center;
+    margin: 100px auto;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 10px;
+    width: 300px;
+
+    img {
+        width: 200px;
+    }
+
+    div {
+        margin: 20px 0;
+    }
+
+    button {
+        height: 50px;
+        padding: 10px;
+        text-align: center;
+    }
+
+}

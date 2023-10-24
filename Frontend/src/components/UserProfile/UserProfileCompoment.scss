@@ -1,0 +1,65 @@
+body.accountpage {
+    .profile {
+        max-width: 400px;
+        margin: 50px auto;
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 5px;
+    }
+
+    .profile h1 {
+        text-align: center;
+    }
+
+    .profile .info {
+        margin-bottom: 20px;
+    }
+
+    .profile .info label {
+        font-weight: bold;
+        display: initial;
+    }
+
+    .profile .info span {
+        margin-left: 10px;
+    }
+
+    .profile .btn-change,
+    .profile .btn-submit {
+        display: block;
+        width: 100px;
+        margin: 0 auto;
+        text-align: center;
+        background-color: #4CAF50;
+        color: #fff;
+        padding: 10px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    .profile .btn-change:hover,
+    .profile .btn-submit:hover {
+        background-color: #45a049;
+    }
+
+    .profile .form {
+        margin-top: 20px;
+    }
+
+    .profile .form label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .profile .form input[type="text"] {
+        width: 100%;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .profile .btn-submit {
+        margin-top: 10px;
+    }
+
+}

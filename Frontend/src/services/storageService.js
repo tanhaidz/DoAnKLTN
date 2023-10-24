@@ -1,0 +1,1 @@
+//Module này chứa các hàm hoặc lớp liên quan đến lưu trữ dữ liệu, chẳng hạn như lưu trữ dữ liệu cục bộ (local storage) hoặc lưu trữ dữ liệu trên máy chủ. Nó có thể chứa các hàm để lưu, truy xuất và xóa dữ liệu từ lưu trữ.
