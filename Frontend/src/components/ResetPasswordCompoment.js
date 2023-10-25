@@ -18,7 +18,7 @@ class ResetPasswordCompoment extends Component {
         }
     }
     render() {
-        console.log(this.state)
+   
         return (
             <>
                 <div className="password-change">

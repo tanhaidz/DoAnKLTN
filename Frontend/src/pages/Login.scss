@@ -43,6 +43,14 @@ body.loginpage {
         cursor: pointer;
     }
 
+    .other-option {
+        align-items: center;
+        width: 100%;
+        justify-content: space-between;
+        /* margin: 10px 0; */
+        margin-bottom: 10px;
+    }
+
     a {
 
         color: #333;

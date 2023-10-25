@@ -1,5 +1,5 @@
 import express from "express";
-import { CreateUser, handleLogin, CreateProduct, GetAllProducts, GetAllcodeByType, GetAllProductInventory, GetProductInventoryByID, GetProductDetailByID, GetTopSellingProducts, GetSaleProducts, GetShoppingCart, SaveChangeToDB, CreateNewOrder, SaveUserData, SendOTP, CheckPassword, ResetPassword, DeleteUser, GetCustomerByID, GetOrder, AdminGetAllData, UpdateProduct, DeleteProduct, ChangeOrderStatus, UpdateProductType, UpdateProductDiscount, SaveRatingProduct, ProcessPayment, CheckPayment, GetNotifications  } from '../controllers/Controller.js'
+import { CreateUser, handleLogin, CreateProduct, GetAllProducts, GetAllcodeByType, GetAllProductInventory, GetProductInventoryByID, GetProductDetailByID, GetTopSellingProducts, GetSaleProducts, GetShoppingCart, SaveChangeToDB, CreateNewOrder, SaveUserData, SendOTP, CheckPassword, ResetPassword, DeleteUser, GetCustomerByID, GetOrder, AdminGetAllData, UpdateProduct, DeleteProduct, ChangeOrderStatus, UpdateProductType, UpdateProductDiscount, SaveRatingProduct, ProcessPayment, CheckPayment, GetNotifications, GetOrderDetails } from '../controllers/Controller.js'
 
 let router = express.Router();
 
@@ -46,6 +46,7 @@ export let initWebRoutes = (app) => {
     //Order
     router.post('/api/createOrder', CreateNewOrder);
     router.get('/api/getOrder', GetOrder);
+    router.get('/api/getOrderDetails', GetOrderDetails);
     router.post('/api/changeOrderStatus', ChangeOrderStatus)
     // router.post('/api/changeOrderStatusCustomer', ChangeOrderStatusCustomer)
     // admin

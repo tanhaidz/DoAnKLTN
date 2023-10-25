@@ -18,7 +18,7 @@ export const createNewOrder = (data) => {
             const { Customer, Order, Payment, OrderItems } = data;
 
             for (const item of OrderItems) {
-                const product = await db.Product.findOne({where:{id:item.ProductID}});
+                const product = await db.Product.findOne({ where: { id: item.ProductID } });
                 if (product) {
                     if (item.Quantity > product.QuantityInStock) {
                         return resolve({
@@ -94,14 +94,14 @@ export const createNewOrder = (data) => {
                 }
                 let payload = {
                     "icon": "bx bx-cart",
-                    "content": "A vừa tạo đơn hàng",
+                    "content": `Đơn hàng có id ${newOrder.id} vừa được tạo`,
                     "isRead": false
                 }
                 await db.Notification.create(payload)
                 pusher.trigger('order', 'notify', payload);
                 resolve({
                     errCode: 0,
-                    errMsg: 'Thành công',
+                    errMsg: 'Đặt hàng thành công',
                     OrderID: newOrder.id,
 
                 })
@@ -133,7 +133,6 @@ export const getOrder = (CustomerID) => {
                     where: { UserID: CustomerID }
                 },
                 )
-                console.log(customer)
                 if (customer) {
                     let orders = await db.Order.findAll({
                         where: {
@@ -165,6 +164,14 @@ export const getOrder = (CustomerID) => {
                         orders: orders
                     })
                 }
+                else {
+                    resolve({
+                        errCode: 0,
+                        errMsg: "Success",
+                        groupedOrderItems: null,
+                        orders: null
+                    })
+                }
 
             }
 
@@ -174,13 +181,39 @@ export const getOrder = (CustomerID) => {
         }
     });
 };
+export const getOrderDetails = (OrderID) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (OrderID) {
+                let OrderDetail = await db.OrderDetail.findAll({
+                    where: {
+                        OrderID: OrderID
+                    }
+                })
+                resolve({
+                    errCode: 0,
+                    OrderDetail: OrderDetail
+                })
+            }
+        } catch (error) {
+            console.log(error);
+            reject(error);
+        }
+    })
+}
 export let changeOrderStatus = (updatedOrder) => {
     return new Promise(async (resolve, reject) => {
         try {
-            console.log(updatedOrder)
+
             if (updatedOrder) {
                 await db.Order.update(updatedOrder, { where: { id: updatedOrder.id } })
-                if (updatedOrder.Status === 'Đã hủy') {
+                if (updatedOrder.Status === 'Đã Hủy') {
+                    // let customer = await db.Customer.findOne({ where: { id: updatedOrder.CustomerID } });
+                    // if (customer) {
+                    //     customer.TotalOrders -= +1;
+                    //     customer.TotalSpend -= +updatedOrder.TotalAmount;
+                    //     await customer.save();
+                    // }
                     let orderItems = await db.OrderDetail.findAll({ where: { OrderID: updatedOrder.id } })
                     if (orderItems && orderItems.length > 0) {
                         try {
@@ -188,9 +221,9 @@ export let changeOrderStatus = (updatedOrder) => {
                                 let orderItem = orderItems[i];
                                 let productID = orderItem.ProductID;
                                 let quantity = orderItem.Quantity;
-                                console.log(productID, quantity)
+
                                 let product = await db.Product.findOne({ where: { id: productID } });
-                                console.log(product)
+
                                 if (product) {
                                     let updatedStock = product.QuantityInStock + +quantity;
                                     let updatedSold = product.Sold - +quantity;
@@ -201,13 +234,14 @@ export let changeOrderStatus = (updatedOrder) => {
                             console.log(error)
                         }
                     }
+
                 }
 
 
 
 
                 let orders = await db.Order.findAll({ where: { CustomerID: updatedOrder.CustomerID } });
-                console.log(orders)
+
                 if (orders) {
                     resolve({
                         errCode: 0,
@@ -223,51 +257,3 @@ export let changeOrderStatus = (updatedOrder) => {
         }
     })
 }
-// export let changeOrderStatusCustomer=(data) => {
-//  return new Promise(async(resolve, reject) => {
-//   try {
-//    console.log(updatedOrder)
-//    if (updatedOrder) {
-//     await db.Order.update(updatedOrder, { where: { id: updatedOrder.id } })
-//     if (updatedOrder.Status === 'Đã hủy') {
-//      let orderItems = await db.OrderDetail.findAll({ where: { OrderID: updatedOrder.id } })
-//      if (orderItems && orderItems.length > 0) {
-//       try {
-//        for (let i = 0; i < orderItems.length; i++) {
-//         let orderItem = orderItems[i];
-//         let productID = orderItem.ProductID;
-//         let quantity = orderItem.Quantity;
-//         console.log(productID, quantity)
-//         let product = await db.Product.findOne({ where: { id: productID } });
-//         console.log(product)
-//         if (product) {
-//          let updatedStock = product.QuantityInStock + +quantity;
-//          let updatedSold = product.Sold - +quantity;
-//          await db.Product.update({ QuantityInStock: updatedStock, Sold: updatedSold }, { where: { id: productID } });
-//         }
-//        }
-//       } catch (error) {
-//        console.log(error)
-//       }
-//      }
-//     }
-
-
-
-//     let orders = await db.Order.findAll({ where: { CustomerID: updatedOrder.CustomerID } });
-//     console.log(orders)
-//     if (orders) {
-//      resolve({
-//       errCode: 0,
-//       errMsg: "Success",
-//       orders: orders
-//      })
-//     }
-
-//    }
-//   } catch (error) {
-//    console.log(error)
-//    reject(error);
-//   }
-//  })
-// }

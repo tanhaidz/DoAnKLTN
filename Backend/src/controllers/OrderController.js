@@ -1,4 +1,4 @@
-import { changeOrderStatus, createNewOrder, getOrder } from '../services/OrderService'
+import { changeOrderStatus, createNewOrder, getOrder, getOrderDetails } from '../services/OrderService'
 export let CreateNewOrder = async (req, res) => {
     try {
         if (req.body) {
@@ -19,6 +19,21 @@ export let GetOrder = async (req, res) => {
         if (req.query.CustomerID) {
 
             let response = await getOrder(req.query.CustomerID);
+            return res.status(200).json(response);
+
+        }
+    } catch (error) {
+        return res.status(200).json({
+            errCode: -1,
+            errMsg: "Error from server"
+        });
+    }
+}
+export let GetOrderDetails=async(req,res)=>{
+    try {
+        if (req.query.OrderID) {
+
+            let response = await getOrderDetails(req.query.OrderID);
             return res.status(200).json(response);
 
         }

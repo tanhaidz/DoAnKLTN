@@ -10,9 +10,14 @@ export let GetOrder = (CustomerID) => {
         params: { CustomerID }
     })
 }
+export let GetOrderDetails = (OrderID) => {
+    return axios.get('/api/getOrderDetails', {
+        params: { OrderID }
+    })
+}
 export let ChangeOrderStatus = (data) => {
     return axios.post('/api/changeOrderStatus', data)
 }
-export let ChangeOrderStatusCustomer= (data) => {
+export let ChangeOrderStatusCustomer = (data) => {
     return axios.post('/api/changeOrderStatusCustomer', data)
 }

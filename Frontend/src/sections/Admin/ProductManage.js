@@ -161,7 +161,7 @@ export default class ProductManage extends Component {
 
         let { ProductName, BrandName, TypeID, UnitPrice, QuantityInStock, Description } = this.state.product
         let { OperatingSystem, Display, Processor, Memory, Camera, Battery, Connectivity, Weight_Dimensions } = this.state.productDetail
-        console.log(this.state.filterValue)
+     
 
 
         return (

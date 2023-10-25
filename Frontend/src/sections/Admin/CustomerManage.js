@@ -1,31 +1,9 @@
 import React, { Component } from 'react'
 import Table from '../../components/table/Table'
 import { CommonUtils } from '../../utils'
+import { withRouter } from 'react-router-dom';
 
-const customerTableHead = [
-    '',
-    'Tên',
-    'Email',
-    'Số điện thoại',
-    'Địa chỉ',
-    'Tổng đơn',
-    'Tổng chi tiêu'
-]
-
-const renderHead = (item, index) => <th key={index}>{item}</th>
-
-const renderBody = (item, index) => (
-    <tr key={index}>
-        <td>{index + 1}</td>
-        <td>{item.Name}</td>
-        <td>{item.Email}</td>
-        <td>{item.Phone}</td>
-        <td>{item.Address}</td>
-        <td>{item.TotalOrders}</td>
-        <td> {CommonUtils.formatCurrency(+item.TotalSpend)}</td>
-    </tr>
-)
-export default class CustomerManage extends Component {
+class CustomerManage extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -45,7 +23,39 @@ export default class CustomerManage extends Component {
             this.handleFilterCustomer();
         }
     }
+    customerTableHead = [
+        '',
+        'Tên',
+        'Email',
+        'Số điện thoại',
+        'Địa chỉ',
+        'Tổng đơn',
+        'Tổng chi tiêu'
+    ]
 
+    renderHead = (item, index) => <th key={index}>{item}</th>
+
+    renderBody = (item, index) => (
+        <tr key={index} onClick={() => this.handleSelectCustomer(item)}>
+            <td>{index + 1}</td>
+            <td>{item.Name}</td>
+            <td>{item.Email}</td>
+            <td>{item.Phone}</td>
+            <td>{item.Address}</td>
+            <td>{item.TotalOrders}</td>
+            <td> {CommonUtils.formatCurrency(+item.TotalSpend)}</td>
+        </tr>
+    )
+    handleSelectCustomer = (item) => {
+        console.log(item)
+        this.props.history.push({
+            pathname: "/orders",
+            state: {
+                CustomerID: item.id,
+            }
+        });
+    }
+    
     handleFilterCustomer = () => {
         let { customers, filterValue } = this.state
         const filteredCustomers = customers.filter(customer => {
@@ -62,7 +72,6 @@ export default class CustomerManage extends Component {
             filteredCustomers: filteredCustomers
         })
     }
-
     handleChangeInput3 = (event) => {
         let { name, value } = event.target
         this.setState({
@@ -102,10 +111,10 @@ export default class CustomerManage extends Component {
                                     <div className="card__body">
                                         <Table
                                             limit='10'
-                                            headData={customerTableHead}
-                                            renderHead={(item, index) => renderHead(item, index)}
+                                            headData={this.customerTableHead}
+                                            renderHead={(item, index) => this.renderHead(item, index)}
                                             bodyData={filteredCustomers}
-                                            renderBody={(item, index) => renderBody(item, index)}
+                                            renderBody={(item, index) => this.renderBody(item, index)}
                                         />
                                     </div>
                                 </div>
@@ -118,3 +127,4 @@ export default class CustomerManage extends Component {
         )
     }
 }
+export default withRouter(CustomerManage)

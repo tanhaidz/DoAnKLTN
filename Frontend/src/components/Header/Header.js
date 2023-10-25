@@ -21,7 +21,7 @@ class Header extends React.Component {
         }));
     }
     handleLocationChange = () => {
-        console.log("location", window.location.pathname)
+
         this.props.updateCurrentURL(window.location.pathname);
 
     }
@@ -31,7 +31,9 @@ class Header extends React.Component {
         let { isShowMenu } = this.state
         return (
             <>
-                <div className="header" style={{ "position": "fixed", zIndex: "999999", width: "100%", top: "0" }}>
+                <div className="header"
+                 style={{ "position": "fixed", zIndex: "99", width: "100%", top: "0" }}
+                >
                     <div className="middle-header">
                         <div className="container">
                             <div className="row align-items-center">

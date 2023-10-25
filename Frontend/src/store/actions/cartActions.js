@@ -3,7 +3,7 @@ import actionTypes from './actionTypes';
 export const fetchShoppingCart = (userID, productArr) => {
     return async (dispatch, getState) => {
         try {
-            console.log(userID)
+   
             let response = await getShoppingCart(userID);
             if (response.errCode === 0) {
 

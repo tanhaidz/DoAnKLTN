@@ -19,7 +19,8 @@ import Header from '../components/Header/Header';
 import Banner from '../sections/Home/Banner';
 import { connect } from 'react-redux';
 import Footer from '../components/Footer/Footer';
-
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 
 class Homepage extends Component {
@@ -37,6 +38,7 @@ class Homepage extends Component {
     body.className = 'homepage';
     this.getSaleProducts();
   }
+
   getSaleProducts = () => {
     let products = this.props.products;
     products.sort((a, b) => b.Sold - a.Sold);
@@ -44,7 +46,7 @@ class Homepage extends Component {
     this.setState({
       top10Objects: top10Objects
     })
-    console.log(top10Objects);
+
   }
   handleAddtoCart = (item) => {
     console.log(item);
@@ -64,7 +66,7 @@ class Homepage extends Component {
         <Header />
         <div style={{ paddingTop: "5em" }}>
           {/* <Banner /> */}
-
+         
           <div className="product_latest" style={{ margin: "100px 0" }}>
             <div className="container section_best_deal ">
               <div className="border-red">
@@ -122,7 +124,7 @@ class Homepage extends Component {
 
 
         </div>
-        <Footer  />
+        <Footer />
 
 
 
@@ -137,7 +139,7 @@ const mapStateToProps = (state) => {
   return {
     products: state.product.products,
     cartItems: state.cart.cartItems,
-
+    errMsg: state.user.errMsg,
 
   }
 }

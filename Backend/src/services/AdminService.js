@@ -1,5 +1,6 @@
 import db from "../models"
-
+const today = new Date();
+const formattedDate = today.toISOString().split('T')[0];
 export let adminGetAllData = () => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -10,7 +11,10 @@ export let adminGetAllData = () => {
                         model: db.ProductType,
                         attributes: ['TypeName'], // Lấy chỉ thuộc tính tên khách hàng
                     },
+                    {
+                        model: db.ProductDiscount,
 
+                    },
 
                 ], raw: true
             })
@@ -35,9 +39,25 @@ export let adminGetAllData = () => {
 
                 ], raw: true
             })
+
             const modifiedProducts = products.map(product => {
-                const { "ProductType.TypeName": temp, ...rest } = product
-                return { Type: temp, ...rest }
+                const { "ProductType.TypeName": temp, "ProductDiscount.Discount": Discount, ['ProductDiscount.EndDate']: EndDate, ['ProductDiscount.StartDate']: StartDate, ...rest } = product
+                // const { ['ProductDiscount.Discount']: temp, ['ProductDiscount.EndDate']: EndDate, ['ProductDiscount.StartDate']: StartDate, ...rest } = product;
+
+                if (
+                    StartDate <= formattedDate &&
+                    (EndDate >= formattedDate || EndDate === null)
+                ) {
+                    return {
+                        Type: temp, ...rest, Discount, DiscountedPrice: product.UnitPrice - +(product.UnitPrice * +Discount/+100), StartDate: StartDate,
+                        EndDate: EndDate, }
+                } else {
+                    return {
+                        Type: temp, ...rest, Discount: 0, DiscountedPrice: product.UnitPrice, StartDate: StartDate,
+                        EndDate: EndDate,
+                    }
+                }
+                // return { Type: temp, ...rest, Discount, DiscountedPrice: product.UnitPrice * Discount }
             })
             const modifiedOrders = orders.map((order) => {
                 const { "Customer.Name": customerName, ...rest } = order;
@@ -93,7 +113,7 @@ export let updateProductDiscount = (data) => {
                 let { productDiscount, action } = data
                 if (action === 'edit') {
                     await db.ProductDiscount.update(productDiscount, { where: { id: productDiscount.id } })
-                }else if (action==='add') {
+                } else if (action === 'add') {
                     await db.ProductDiscount.create(productDiscount)
                 }
                 let productDiscounts = await db.ProductDiscount.findAll({ raw: true })

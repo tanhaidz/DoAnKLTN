@@ -8,7 +8,7 @@ export { GetAllProductInventory, GetProductInventoryByID } from './ProductInvent
 export { GetProductDetailByID } from './ProductDetailController';
 export { GetSaleProducts } from './SalesProductsController';
 export { GetShoppingCart, SaveChangeToDB } from './shoppingCartController';
-export { CreateNewOrder, GetOrder, ChangeOrderStatus,  } from './OrderController';
+export { CreateNewOrder, GetOrder, ChangeOrderStatus, GetOrderDetails } from './OrderController';
 export { SendOTP } from './EmailController';
 export { AdminGetAllData, UpdateProductType, UpdateProductDiscount } from './AdminController';
 export { ProcessPayment, CheckPayment } from './PaymentController';

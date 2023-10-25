@@ -13,7 +13,7 @@ export default class FilterBoxCompoment extends Component {
         this.props.handleChangeInput3(event)
     }
     render() {
-        console.log(this.state)
+    
         return (
             <>
                 <div className="col-12">

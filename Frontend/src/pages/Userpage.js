@@ -10,10 +10,8 @@ import Header from '../components/Header/Header';
 import UserProfileCompoment from '../components/UserProfile/UserProfileCompoment';
 import { Button, Modal, ModalBody, ModalFooter } from 'reactstrap';
 import { Redirect } from 'react-router-dom';
-import { CommonUtils } from '../utils';
-import OrderCardCompoment from '../components/OrderCardCompoment';
 import OrderCard from '../components/OrderCard/OrderCard';
-
+import { toast } from 'react-toastify';
 function mapStateToProps(state) {
   return {
     userInfo: state.user.userInfo,
@@ -56,7 +54,7 @@ class Userpage extends Component {
   }
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.userInfo !== this.props.userInfo) {
-      alert(this.props.errMsg)
+      toast.success(this.props.errMsg)
       this.setState({
         userInfo: this.props.userInfo
       })
@@ -214,41 +212,28 @@ class Userpage extends Component {
                         <a className="sub-nav active" data-key={""}>
                           <span className="sub-name">Tất cả</span>
                         </a>
-                        <a className="sub-nav" data-key={"Đang chờ thanh toán"}>
+                        <a className="sub-nav" data-key={"Đang Chờ Xác Nhận"}>
+                          <span className="sub-name">Đang chờ xác nhận</span>
+                        </a>
+                        <a className="sub-nav" data-key={"Đang Chờ Thanh Toán"}>
                           <span className="sub-name">Đang chờ thanh toán</span>
                         </a>
-                        <a className="sub-nav" data-key={"Đang xử lý"}>
+                        <a className="sub-nav" data-key={"Đang Xử Lý"}>
                           <span className="sub-name">Đang xử lý</span>
                         </a>
-                        <a className="sub-nav" data-key={"Hoàn thành"}>
+                        <a className="sub-nav" data-key={"Hoàn Thành"}>
                           <span className="sub-name">Hoàn thành</span>
                         </a>
-
-                        <a className="sub-nav" title="Đã hủy" data-key={"Đã hủy"}>
+                        <a className="sub-nav" data-key={"Đã Hủy"}>
                           <span className="sub-name">Đã hủy</span>
                         </a>
                       </section>
-                      {/* <section>
-                        <div className="box-search">
-                          <svg width="19px" height="19px" viewBox="0 0 19 19">
-                            <g id="Search-New" strokeWidth={1} fill="none" fillRule="evenodd">
-                              <g id="my-purchase-copy-27" transform="translate(-399.000000, -221.000000)" strokeWidth={2}>
-                                <g id="Group-32" transform="translate(400.000000, 222.000000)">
-                                  <circle id="Oval-27" cx={7} cy={7} r={7} />
-                                  <path d="M12,12 L16.9799555,16.919354" id="Path-184" strokeLinecap="round" strokeLinejoin="round" />
-                                </g>
-                              </g>
-                            </g>
-                          </svg>
-                          <input role="search" autoComplete="off" placeholder="Bạn có thể tìm kiếm theo ID đơn hàng hoặc Tên Sản phẩm" />
-                        </div>
-                      </section> */}
+
                       <main>
 
-
-                        <OrderCard
-                          groupedOrderItems={groupedOrderItems} products={this.props.products} listOrders={filteredOrders} />
-
+                        {groupedOrderItems && filteredOrders ?
+                          <OrderCard groupedOrderItems={groupedOrderItems} products={this.props.products} listOrders={filteredOrders} /> : <div style={{ textAlign: 'center' }}>Không có đơn hàng nào</div>
+                        }
                       </main>
                     </>}
                     {this.state.leftActiveKey === 0 && content2}

@@ -10,7 +10,14 @@ class OrderCard extends Component {
       groupedOrderItems: this.props.groupedOrderItems,
       listOrders: this.props.listOrders,
       modal: false,
-
+      admin: false,
+    }
+  }
+  componentDidMount() {
+    if (this.props.admin === true) {
+      this.setState({
+        admin: true
+      })
     }
   }
   componentDidUpdate(prevProps) {
@@ -37,7 +44,7 @@ class OrderCard extends Component {
     this.setState({ modal: !this.state.modal })
   }
   handleCancelOrder = async (order) => {
-    if (order.Status === 'Hoàn thành' || order.Status === 'Đã hủy') {
+    if (order.Status === 'Hoàn Thành' || order.Status === 'Đã Hủy') {
       let { groupedOrderItems } = this.state
       let listItem = groupedOrderItems[order.id].map((item, j) => {
         const product = this.findProductById(item.ProductID);
@@ -46,23 +53,14 @@ class OrderCard extends Component {
           ...product
         }
       })
-      // let { DiscountedPrice, UnitPrice, ImageURL, id, ProductName } = this.props.product
-      // let { quantity } = this.state
-      // let orderProductInfo = {
-      //   DiscountedPrice,
-      //   UnitPrice,
-      //   ImageURL,
-      //   ProductID: id,
-      //   ProductName,
-      //   Quantity: quantity
-      // };
+
       await this.props.saveOrderInfo({ orderProductInfo: listItem })
       window.location.href = '/order?type=buynow';
     } else {
       let { groupedOrderItems } = this.props
       const updatedOrder = {
         ...order,
-        Status: "Đã hủy"
+        Status: "Đã Hủy"
       };
       const orderID = order.id;
       const orderItems = groupedOrderItems[orderID] || [];
@@ -75,6 +73,12 @@ class OrderCard extends Component {
   };
   render() {
     const { groupedOrderItems, listOrders } = this.state;
+    console.log(groupedOrderItems, listOrders)
+    try {
+      listOrders.sort((a, b) => new Date(b.Date) - new Date(a.Date));
+    } catch (error) {
+      console.log(error)
+    }
 
     return (
       <>
@@ -89,8 +93,8 @@ class OrderCard extends Component {
                   <p className="text-muted mb-0 status ">{order.Status}</p>
                 </div>
                 {groupedOrderItems[order.id] && groupedOrderItems[order.id].map((item, j) => {
-                  const product = this.findProductById(item.ProductID); // Tìm tên sản phẩm
-
+                  const product = this.findProductById(item.ProductID);
+                  console.log(this.props.products)
                   return (
                     <div className="card shadow-0 border mb-4">
                       <div className="card-body">
@@ -146,13 +150,14 @@ class OrderCard extends Component {
                   </div>
                 </div>
               </div>
-              <div className="card-footer border-0 px-4 py-3 d-flex justify-content-center" style={{ backgroundColor: '#a8729a', borderBottomLeftRadius: '10px', borderBottomRightRadius: '10px' }} onClick={() => this.handleCancelOrder(order)}>
-                {order.Status === 'Hoàn thành' || order.Status === 'Đã hủy' ?
+              {!this.state.admin && <div className="card-footer border-0 px-4 py-3 d-flex justify-content-center" style={{ backgroundColor: '#a8729a', borderBottomLeftRadius: '10px', borderBottomRightRadius: '10px' }} onClick={() => this.handleCancelOrder(order)}>
+                {order.Status === 'Hoàn Thành' || order.Status === 'Đã Hủy' ?
                   <h5 className='text-white text-uppercase mb-0 text-align-center'>Mua lại</h5> :
                   <h5 className='text-white text-uppercase mb-0 text-align-center' >Hủy đơn</h5>
                 }
 
-              </div>
+              </div>}
+
             </div>
           </div>
         ))}

@@ -1,6 +1,8 @@
 import db from "../models";
 import product from "../models/product";
 const today = new Date();
+const formattedDate = today.toISOString().split('T')[0];
+console.log(formattedDate);
 const { Op } = require('sequelize');
 export let createProduct = (data) => {
     return new Promise(async (resolve, reject) => {
@@ -40,19 +42,6 @@ export let getAllProducts = () => {
                 include: [
                     {
                         model: db.ProductDiscount,
-                        attributes: ['Discount'],
-                        where: {
-                            StartDate: {
-                                [Op.lte]: today,
-                            },
-                            EndDate: {
-                                [Op.or]: {
-                                    [Op.gte]: today,
-                                    [Op.is]: null,
-                                },
-                            },
-                        },
-
 
                     },
                 ],
@@ -62,11 +51,30 @@ export let getAllProducts = () => {
                 console.log(errors);
             })
             result = result.map((product) => {
-                const { ['ProductDiscount.Discount']: temp, ...rest } = product;
-                return {
-                    ...rest,
-                    Discount: temp,
-                };
+                const { ['ProductDiscount.Discount']: temp, ['ProductDiscount.EndDate']: EndDate, ['ProductDiscount.StartDate']: StartDate, ...rest } = product;
+
+                if (
+                    StartDate <= formattedDate &&
+                    (EndDate >= formattedDate || EndDate === null)
+                ) {
+                    return {
+                        ...rest,
+                        Discount: temp,
+                        StartDate: StartDate,
+                        EndDate: EndDate
+                    };
+                } else {
+                    return {
+                        ...rest,
+                        Discount: 0,
+                        StartDate: StartDate,
+                        EndDate: EndDate,
+
+                    };
+                }
+
+
+
             });
             resolve({
                 errCode: 0,
@@ -117,7 +125,7 @@ export let updateProduct = (data) => {
                     }
                 } else {
                     try {
-                        let ImageURL ='https://smartviets.com/template/plugins/timthumb.php?src=/upload/iPHONE15/iPHONE15PR-PRM/15PRM-white_titanium.jpg&w=770&h=770&q=80'
+                        let ImageURL = 'https://smartviets.com/template/plugins/timthumb.php?src=/upload/iPHONE15/iPHONE15PR-PRM/15PRM-white_titanium.jpg&w=770&h=770&q=80'
                         let newproduct = await db.Product.create({ ...product, ImageURL, Rate: 5, Sold: 0 })
                         if (newproduct) {
                             productDetail = { ...productDetail, ProductID: newproduct.id }

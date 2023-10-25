@@ -2,15 +2,11 @@
 import React, { Component } from 'react'
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-// import Home from './pages/Home'
-// import Login from './pages/Login'
-// import Product from './pages/Product';
-// import CustomScrollbars from './components/CustomScrollbars';
+
 import * as actions from "./store/actions";
 import { connect } from 'react-redux'
 import { getAllProducts } from './services/productService';
 import { CommonUtils } from './utils';
-// import ProductDetail from './pages/ProductDetail';
 import Homepage from './pages/Homepage';
 import Productspage from './pages/Productspage';
 import ProductDetailspage from './pages/ProductDetailspage';
@@ -23,7 +19,9 @@ import Aboutpage from './pages/Aboutpage';
 import Newspage from './pages/Newspage';
 import GuestManage from './pages/GuestManage';
 import Payment from './pages/Payment';
-import OrderCard from './components/OrderCard/OrderCard';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -33,7 +31,7 @@ class App extends Component {
   }
   async componentDidMount() {
 
-    console.log(1111111111111111111111)
+
 
     const fetchedProducts = await getAllProducts();
     if (fetchedProducts.errCode === 0 && fetchedProducts.products && fetchedProducts.products.length > 0) {
@@ -78,8 +76,7 @@ class App extends Component {
     return (
       <>
         <Router>
-
-
+          <ToastContainer style={{ "position": "fixed", zIndex: "9999", top: "0" }} />
           <Switch>
             {this.props.isLoggedIn && this.props.userInfo && this.props.userInfo.RoleKeyMap === "ADMIN" ?
               <Route path="/" render={(props) => {
@@ -121,6 +118,7 @@ class App extends Component {
 
     );
   }
+
 
 };
 const mapDispatchToProps = (dispatch) => {

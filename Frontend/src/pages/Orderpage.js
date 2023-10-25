@@ -8,6 +8,7 @@ import { CommonUtils } from '../utils';
 import { Link, Redirect } from 'react-router-dom';
 import { createNewOrder } from '../services/orderService';
 import { withRouter } from 'react-router-dom/cjs/react-router-dom.min';
+import { toast } from 'react-toastify';
 // import "../styles/chosen.scss"
 let TotalPrice = 0;
 let fee = 50000
@@ -414,9 +415,9 @@ class Orderpage extends Component {
                 Customer = { Name, Email, Phone, Address, UserID: this.props.guestID }
             }
 
-            let status = 'Đang chờ xác nhận'
+            let status = 'Đang Chờ Xác Nhận'
             if (PaymentMethod !== 'COD') {
-                status = "Đang chờ thanh toán"
+                status = "Đang Chờ Thanh Toán"
             }
             let Order = {
                 Date: new Date(Date.now()).toLocaleDateString(),
@@ -449,11 +450,11 @@ class Orderpage extends Component {
                         state: response.OrderID
                     });
                 } else {
-                    alert(response.errMsg);
+                    toast.success(response.errMsg);
                     this.props.history.push("/");
                 }
             } else {
-                alert(response.errMsg);
+                toast.warn(response.errMsg);
             }
 
 

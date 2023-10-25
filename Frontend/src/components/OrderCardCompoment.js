@@ -40,7 +40,7 @@ class OrderCardCompoment extends Component {
   let { groupedOrderItems } = this.props
   const updatedOrder = {
    ...order,
-   Status: "Đã hủy"
+   Status: "Đã Hủy"
   };
   const orderID = order.id;
   const orderItems = groupedOrderItems[orderID] || [];

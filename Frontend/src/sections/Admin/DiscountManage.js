@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import Table from '../../components/table/Table';
+import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
+import './form.scss'
 const customerTableHead = [
     '',
     'Tên sản phẩm',
@@ -21,6 +23,7 @@ export default class DiscountManage extends Component {
                 toDate: '3000-01-01',
                 searchValue: ''
             },
+            modal: false,
         }
     }
     async componentDidMount() {
@@ -78,14 +81,11 @@ export default class DiscountManage extends Component {
     )
 
     handleEdit = async (item) => {
-        let form = document.querySelector('.form');
-        if (form) {
-            form.classList.add('active')
-        }
 
         this.setState({
             productDiscount: item,
             action: 'edit',
+            modal: true
         })
     }
     handleSave = async () => {
@@ -94,10 +94,9 @@ export default class DiscountManage extends Component {
         window.location.reload()
     }
     handleClickCancel = () => {
-        let form = document.querySelector('.form');
-        if (form) {
-            form.classList.remove('active')
-        }
+        this.setState({
+            modal: false
+        })
     }
     handleChangeInput = (event) => {
         let { name, value } = event.target
@@ -169,39 +168,8 @@ export default class DiscountManage extends Component {
                                                 />
 
                                             </div>
-                                            <div className="form" >
-                                                <form id="productForm" onChange={(event) => this.handleChangeInput(event)}>
-                                                    <div className="row">
-                                                        <div className="col-6">
-                                                            <label htmlFor="ProductName">Tên sản phẩm</label>
-
-                                                            <input type="text" id="name" name="ProductName" value={ProductName} />
-                                                        </div>
-                                                        <div className="col-6">
-                                                            <label htmlFor="Discount">Giảm giá %</label>
-                                                            <input type="number" id="brand" name="Discount" value={Discount} />
-                                                        </div>
-                                                        <div className="col-6">
-                                                            <label htmlFor="StartDate">Ngày bắt đầu</label>
-                                                            <input type="date" id="name" name="StartDate" value={StartDate} />
-                                                        </div>
-                                                        <div className="col-6">
-                                                            <label htmlFor="EndDate">Ngày kết thúc</label>
-                                                            <input type="date" id="brand" name="EndDate" value={EndDate} />
-                                                        </div>
-                                                        <div className="col-6">
-                                                            <button type='button' onClick={() => this.handleSave()}>Lưu thay đổi</button>
-                                                        </div>
-                                                        <div className="col-6">
-                                                            <button type='button' onClick={() => this.handleClickCancel()}>Hủy bỏ</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
 
 
-
-
-                                            </div>
                                         </div>
                                     </div>
 
@@ -210,7 +178,43 @@ export default class DiscountManage extends Component {
 
 
                         </div>
+                        <Modal isOpen={this.state.modal} fullscreen centered>
+                            <ModalHeader toggle={() => this.handleClickCancel()}>Thông tin sản phẩm</ModalHeader>
+                            <ModalBody>
+                                <div className="form" >
+                                    <form id="productForm" onChange={(event) => this.handleChangeInput(event)}>
+                                        <div className="row">
+                                            <div className="col-6">
+                                                <label htmlFor="ProductName">Tên sản phẩm</label>
 
+                                                <input type="text" id="name" name="ProductName" value={ProductName} disabled/>
+                                            </div>
+                                            <div className="col-6">
+                                                <label htmlFor="Discount">Giảm giá %</label>
+                                                <input type="number" id="brand" name="Discount" value={Discount} />
+                                            </div>
+                                            <div className="col-6">
+                                                <label htmlFor="StartDate">Ngày bắt đầu</label>
+                                                <input type="date" id="name" name="StartDate" value={StartDate} />
+                                            </div>
+                                            <div className="col-6">
+                                                <label htmlFor="EndDate">Ngày kết thúc</label>
+                                                <input type="date" id="brand" name="EndDate" value={EndDate} />
+                                            </div>
+
+                                        </div>
+                                    </form>
+
+
+
+
+                                </div>
+                            </ModalBody>
+                            <ModalFooter>
+                                <Button color="primary" onClick={() => this.handleSave()}>Lưu</Button>
+                                <Button color="secondary" onClick={() => this.handleClickCancel()}>Hủy</Button>
+                            </ModalFooter>
+                        </Modal>
 
                     </>
 

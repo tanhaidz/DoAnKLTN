@@ -20,7 +20,8 @@ function mapStateToProps(state) {
         orders: state.admin.orders,
         productTypes: state.admin.productTypes,
         productDiscounts: state.admin.productDiscounts,
-        notifyArr: state.notification.notifyArr
+        notifyArr: state.notification.notifyArr,
+
     };
 }
 
@@ -71,7 +72,12 @@ class Adminpage extends Component {
     render() {
         let { userInfo, updateProduct, changeOrderStatus, updateProductType, updateProductDiscount, signout, notifyArr } = this.props;
         let { customers, products, orders, productTypes, productDiscounts } = this.state;
-
+        console.log(this.props.location.state)
+        let CustomerID = ''
+        if (this.props.location.state && this.props.location.state.CustomerID) {
+            CustomerID = this.props.location.state.CustomerID
+        }
+        console.log("check customer", CustomerID)
         return (
             <>
                 {customers && products && orders && productDiscounts && productTypes &&
@@ -89,7 +95,7 @@ class Adminpage extends Component {
                                     <Route exact path='/' render={() => (<DashbardManage products={products} customers={customers} orders={orders} />)} />
                                     <Route path='/customers' render={() => (<CustomerManage customers={customers} />)} />
                                     <Route path='/products' render={() => (<ProductManage products={products} types={productTypes} updateProduct={updateProduct} />)} />
-                                    <Route path='/orders' render={() => (<OrderManage orders={orders} changeOrderStatus={changeOrderStatus} />)} />
+                                    <Route path='/orders' render={() => (<OrderManage orders={orders} changeOrderStatus={changeOrderStatus} CustomerID={CustomerID} products={this.props.products} />)} />
                                     <Route path='/categories' render={() => (<CategoryMangage productTypes={productTypes} updateProductType={updateProductType} />)} />
                                     <Route path='/discounts' render={() => (<DiscountManage productDiscounts={productDiscounts} updateProductDiscount={updateProductDiscount} products={products} />)} />
                                 </Switch>
