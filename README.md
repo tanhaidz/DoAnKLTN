@@ -5,3 +5,5 @@ Front End: chạy dòng lệnh "npm install" và "npm start" để chạy
 Back End:  chạy dòng lệnh "npm install" và "npm start" để chạy
 ![image](https://github.com/tanhaidz/DoAnKLTN/assets/148848436/ea31f748-0ee9-4105-88f7-6300409a86bc)
 
+Tạo Database mới "database" trên phpmyadmin
+
