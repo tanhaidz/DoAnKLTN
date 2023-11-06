@@ -32,7 +32,7 @@ export let SaveUserData = async (req, res) => {
     try {
 
         if (req.body) {
-            console.log("check:", req.body);
+
             let response = await saveUserData(req.body);
             return res.status(200).json(response);
 
@@ -47,7 +47,7 @@ export let SaveUserData = async (req, res) => {
 export let CheckPassword = async (req, res) => {
     try {
         if (req.body) {
-            console.log("check:", req.body);
+            
             let response = await checkPassword(req.body);
             return res.status(200).json(response);
 

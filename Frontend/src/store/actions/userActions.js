@@ -92,7 +92,8 @@ export const saveUserData = (userData) => {
             if (response.errCode === 0) {
                 dispatch({
                     type: actionTypes.SAVE_CHANGE_USER_SUCCESS,
-                    payload: response.userInfo
+                    payload: response.userInfo,
+                    payload2: response.errMsg
                 })
             }
 

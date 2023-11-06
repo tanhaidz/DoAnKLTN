@@ -78,10 +78,6 @@ class UserProfileCompoment extends Component {
                                                       <label>Email:</label>
                                                       <span id="email">{userInfo.Email}</span>
                                                 </div>
-                                                <div className="info form-control">
-                                                      <label>Số điện thoại:</label>
-                                                      <span id="phone">1234567890</span>
-                                                </div>
                                                 <a className="btn-change" onClick={() => this.setState({ isShowForm: true })}>Thay đổi</a>
                                           </> :
                                           <>
@@ -92,9 +88,7 @@ class UserProfileCompoment extends Component {
                                                       <input type="text" name='Name' required />
                                                       <label>Email:</label>
                                                       <input type="text" name='Email' required value={userInfo.Email} disabled style={{ background: '#8080804d' }} />
-                                                      <label>Số điện thoại:</label>
-                                                      <input type="text" name='Phone' required />
-                                                      <input type="button" defaultValue="Cập nhật" className="btn-submit" onClick={() => this.handleAuth()} />
+                                                      <input type="button" defaultValue="Cập nhật" className="btn-submit" onClick={() => this.handleSubmit()} />
                                                 </form>
                                           </>}
 
@@ -102,7 +96,7 @@ class UserProfileCompoment extends Component {
                               </div>
                               <div>
 
-                                    <Modal isOpen={this.state.modal} toggle={() => this.toggle()} >
+                                    {/* <Modal isOpen={this.state.modal} toggle={() => this.toggle()} fullscreen>
                                           <ModalHeader>
                                                 <span>Vui lòng kiểm tra email và nhập mã xác thực vào dưới đây để hoàn tất việc thay đổi</span>
                                           </ModalHeader>
@@ -114,7 +108,7 @@ class UserProfileCompoment extends Component {
 
                                           </ModalBody>
 
-                                    </Modal>
+                                    </Modal> */}
                               </div>
 
                         </>}
@@ -123,20 +117,26 @@ class UserProfileCompoment extends Component {
             )
       }
       async handleSubmit() {
-            let { OTPinput } = this.state
-            if (OTP === OTPinput) {
-                  let { Name } = this.state
-                  let { id } = this.props.userInfo
-                  console.log(id)
-                  let userData = { Name, id }
-                  await this.props.saveUserData(userData)
-                  this.setState({
-                        isShowForm: false,
-                        modal: false
-                  })
-            } else {
-                  alert('Mã xác thực sai')
-            }
+            // let { OTPinput } = this.state
+            // if (OTP === OTPinput) {
+            //       let { Name } = this.state
+            //       let { id } = this.props.userInfo
+            //       console.log(id)
+            //       let userData = { Name, id }
+            //       await this.props.saveUserData(userData)
+            //       this.setState({
+            //             isShowForm: false,
+            //             modal: false
+            //       })
+            // } else {
+            //       alert('Mã xác thực sai')
+            // }
+            let { Name } = this.state
+            let { id } = this.props.userInfo
+            console.log(id)
+            let userData = { Name, id }
+            await this.props.saveUserData(userData)
+            this.setState({ isShowForm: false })
       }
       async handleAuth() {
             OTP = this.generateOTP();

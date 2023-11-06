@@ -10,8 +10,6 @@ const pusher = new Pusher({
     cluster: "ap1",
     useTLS: true
 });
-
-
 export const createNewOrder = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -19,6 +17,8 @@ export const createNewOrder = (data) => {
 
             for (const item of OrderItems) {
                 const product = await db.Product.findOne({ where: { id: item.ProductID } });
+                console.log(item.Quantity)
+                console.log(product.QuantityInStock)
                 if (product) {
                     if (item.Quantity > product.QuantityInStock) {
                         return resolve({
@@ -94,7 +94,7 @@ export const createNewOrder = (data) => {
                 }
                 let payload = {
                     "icon": "bx bx-cart",
-                    "content": `Đơn hàng có id ${newOrder.id} vừa được tạo`,
+                    "content": `${Customer.Name} vừa tạo đơn hàng mới`,
                     "isRead": false
                 }
                 await db.Notification.create(payload)
@@ -106,16 +106,6 @@ export const createNewOrder = (data) => {
 
                 })
             }
-
-            // let payload = {
-            //     "icon": "bx bx-cart",
-            //     "content": "A vừa tạo đơn hàng"
-            // }
-            // pusher.trigger('order', 'notify', payload);
-            // resolve({
-            //     errCode: 0,
-            //     errMsg: 'Thành công',
-            // })
         } catch (error) {
             console.log(error);
             reject(error)

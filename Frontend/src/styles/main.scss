@@ -1127,79 +1127,79 @@ body.productpage-detail, body.accountpage {
         }
     }
 
-    .modal-content {
-        border: none;
-        box-shadow: none;
-        border-radius: 0.5rem;
-        position: relative;
-        background-color: $background-color_3;
-        background-clip: padding-box;
-        outline: 0;
-    }
+    // .modal-content {
+    //     border: none;
+    //     box-shadow: none;
+    //     border-radius: 0.5rem;
+    //     position: relative;
+    //     background-color: $background-color_3;
+    //     background-clip: padding-box;
+    //     outline: 0;
+    // }
 
-    .modal-header {
-        background-color: $background-color_4;
-        color: $color_7;
-        padding: 15px;
-        border-bottom: 1px solid #e5e5e5;
-        min-height: 16.42857143px;
-        border-top-left-radius: 0.5rem;
-        border-top-right-radius: 0.5rem;
+    // .modal-header {
+    //     background-color: $background-color_4;
+    //     color: $color_7;
+    //     padding: 15px;
+    //     border-bottom: 1px solid #e5e5e5;
+    //     min-height: 16.42857143px;
+    //     border-top-left-radius: 0.5rem;
+    //     border-top-right-radius: 0.5rem;
 
-        .close {
-            margin-top: -2px;
-        }
+    //     .close {
+    //         margin-top: -2px;
+    //     }
 
-        .modal-title {
-            padding-left: 6rem;
-            position: relative;
-            min-height: 44px;
-            font-weight: normal;
-            font-size: 18px;
-            line-height: normal;
-            margin: 0;
-            color: $color_7;
+    //     .modal-title {
+    //         padding-left: 6rem;
+    //         position: relative;
+    //         min-height: 44px;
+    //         font-weight: normal;
+    //         font-size: 18px;
+    //         line-height: normal;
+    //         margin: 0;
+    //         color: $color_7;
 
-            span {
-                width: 44px;
-                height: 44px;
-                border-radius: 100%;
-                font-size: 23px;
-                text-align: center;
-                line-height: 44px;
-                color: $color_1;
-                position: absolute;
-                left: 0;
-                top: 0;
-                display: block;
-                background-color: $background-color_3;
-            }
-        }
-    }
+    //         span {
+    //             width: 44px;
+    //             height: 44px;
+    //             border-radius: 100%;
+    //             font-size: 23px;
+    //             text-align: center;
+    //             line-height: 44px;
+    //             color: $color_1;
+    //             position: absolute;
+    //             left: 0;
+    //             top: 0;
+    //             display: block;
+    //             background-color: $background-color_3;
+    //         }
+    //     }
+    // }
 
-    .modal-body {
-        position: relative;
-        padding: 15px;
-    }
+    // .modal-body {
+    //     position: relative;
+    //     padding: 15px;
+    // }
 
-    button.close {
-        padding: 0;
-        cursor: pointer;
-        background: transparent;
-        border: 0;
-        -webkit-appearance: none;
-    }
+    // button.close {
+    //     padding: 0;
+    //     cursor: pointer;
+    //     background: transparent;
+    //     border: 0;
+    //     -webkit-appearance: none;
+    // }
 
-    .close {
-        float: right;
-        font-size: 21px;
-        font-weight: bold;
-        line-height: 1;
-        color: $color_2;
-        text-shadow: 0 1px 0 #fff;
-        opacity: 0.2;
-        filter: alpha(opacity=20);
-    }
+    // .close {
+    //     float: right;
+    //     font-size: 21px;
+    //     font-weight: bold;
+    //     line-height: 1;
+    //     color: $color_2;
+    //     text-shadow: 0 1px 0 #fff;
+    //     opacity: 0.2;
+    //     filter: alpha(opacity=20);
+    // }
 
     #myModal {
         .media-body {

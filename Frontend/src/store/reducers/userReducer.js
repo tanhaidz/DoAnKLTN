@@ -49,7 +49,8 @@ const userReducer = (state = initialState, action) => {
         case actionTypes.SAVE_CHANGE_USER_SUCCESS:
             return {
                 ...state,
-                userInfo: action.payload
+                userInfo: action.payload,
+                errMsg: action.payload2
             }
         case actionTypes.DELETE_USER_SUCCESS:
             return {

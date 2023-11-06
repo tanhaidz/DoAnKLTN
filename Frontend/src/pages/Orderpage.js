@@ -397,9 +397,6 @@ class Orderpage extends Component {
         //tt
         // đang chờ thanh toán, đagn xử lý, hoàn thành,đã hủy
         // đang xử lý, hoàn thành,đã hủy
-
-
-
         let { listItem } = this.state
         let { Name, Email, Phone, Address } = this.state.customerInfo;
         let { PaymentMethod, Note } = this.state;

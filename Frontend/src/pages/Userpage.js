@@ -54,11 +54,14 @@ class Userpage extends Component {
   }
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.userInfo !== this.props.userInfo) {
-      toast.success(this.props.errMsg)
+
       this.setState({
         userInfo: this.props.userInfo
       })
 
+    }
+    if(prevProps.errMsg!==this.props.errMsg) {
+      toast.success(this.props.errMsg)
     }
     if (prevProps.groupedOrderItems !== this.props.groupedOrderItems) {
       let { groupedOrderItems, products } = this.props
